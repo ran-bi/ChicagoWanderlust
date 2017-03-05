@@ -19,6 +19,7 @@ def home(request):
       
         if form.is_valid():
             data = form.cleaned_data
+            print(data)
             template = 'results.html'
             criteris_met, context = algorithem.foof(data)
             #Criteria met show this page
@@ -34,4 +35,6 @@ def home(request):
         template = 'home.html'
         context = {'form':form}
     return render(request, template, context)
+
+
 
