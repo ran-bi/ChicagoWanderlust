@@ -21,6 +21,8 @@ def abscraper(checkin, checkout, min_price, max_price):
 		listing['name'] = result['listing']['name']
 		listing['reviews_count'] = result['listing']['reviews_count']
 		listing['price'] = int(result['pricing_quote']['rate_with_service_fee']['amount'])
+		listing['url'] = "https://www.airbnb.com/rooms/" + str(result['listing']['id'])
+
 		all_listings.append(listing)
 		rank += 1  
 
