@@ -21,8 +21,14 @@ def home(request):
             data = form.cleaned_data
             template = 'results.html'
             criteris_met, context = algorithem.foof(data)
-            return render(request, template, context)
-     
+            #Criteria met show this page
+            if criteris_met:
+            	return render(request, template, context)
+            #Criteria NOT met show this page
+            else:
+            	template = 'noresults.html'
+            	return render(request, template, context)
+
     else:    
         form = RecommendationForm()
         template = 'home.html'
