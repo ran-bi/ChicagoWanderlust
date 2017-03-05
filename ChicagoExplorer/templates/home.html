@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+input[type=submit] {
+    border: 1px solid #ffffff;
+    color: #fff;
+    background: #FFC300;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size:120%;}
+
+form{color:#ccc;}
+</style>
+
+
+<form method='POST' action=''> 
+    {% csrf_token %}
+	{{ form.as_p }}
+	<input type='submit' value='Explore'/>
+</form>
+
+{% endblock %}
+
+
