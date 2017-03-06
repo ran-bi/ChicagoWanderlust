@@ -13,6 +13,7 @@ AIRBNB = airbnb('2017-06-06', '2017-06-08', 50, 200)
 BOOKING = booking('2017-06-06', '2017-06-08', 50, 200)
 LOCATIONS = AIRBNB.append(BOOKING)
 
+
 CHECKIN = datetime.date(2017,6,6)
 T = datetime.datetime.combine(CHECKIN, datetime.time(10,0))
 DEPARTURE = (T-datetime.datetime(1970,1,1)).total_seconds()
@@ -20,6 +21,7 @@ DEPARTURE = (T-datetime.datetime(1970,1,1)).total_seconds()
 ATTRACTIONS = pd.read_csv('Attraction List.csv', index_col = 'Identifier')
 TRANSIT_MODE = 'driving'
 TRANSIT_MODE = 'transit'
+
 
 def transform_checkindate(CHECKIN):
     t = datetime.datetime.combine(CHECKIN, datetime.time(10,0))
