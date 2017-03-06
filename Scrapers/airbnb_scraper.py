@@ -3,8 +3,10 @@ import requests
 import pandas as pd
 
 
-def abscraper(checkin, checkout, min_price, max_price):
+def airbnb(checkin, checkout, min_price, max_price):
+	checkin = checkin.strftime('%Y-%m-%d')
 	checkin = checkin.replace('-','%2D')
+	checkout = checkout.strftime('%Y-%m-%d')
 	checkout = checkout.replace('-', '%2D')
 	url = 'https://api.airbnb.com/v2/search_results?client_id=3092nxybyb0otqw18e8nh5nty&checkin={}&checkout={}&locale=en-US&currency=USD&_format=for_search_results_with_minimal_pricing&_limit=50&_offset=0&fetch_facets=true&guests=2&ib=false&location=Chicago%20IL%20US&min_bathrooms=0&min_bedrooms=0&min_beds=1&&price_max={}&price_min={}&sort=1'.format(checkin, checkout,max_price, min_price)
 	r = requests.get(url)

@@ -9,6 +9,7 @@ from datetime import datetime
 
 
 def booking(checkin, checkout, minprice, maxprice):
+'''
 	checkin_monthday = checkin[-2:]
 	checkin_year_month = checkin[:-3]
 	checkout_monthday = checkout[-2:]
@@ -18,6 +19,12 @@ def booking(checkin, checkout, minprice, maxprice):
 	checkindate = datetime.strptime(checkin, date_format)
 	checkoutdate = datetime.strptime(checkout, date_format)
 	delta = checkoutdate - checkindate
+'''
+	checkin_monthday = checkin.strftime('%d')
+	checkin_year_month = checkin.strftime('%Y-%m')
+	checkout_monthday = checkout.strftime('%d')
+	checkout_year_month = checkout.strftime('%Y-%m')
+	delta = checkout - checkin
 
 	url = "http://www.booking.com/searchresults.html"
 	payload = {
