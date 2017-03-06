@@ -1,0 +1,33 @@
+Attraction Name,Identifier,Hours Needed,Architecture,Art & Culture,History,Kids/Family,Landmarks & Sightseeing,Museums,Parks & Nature,Sports & Entertainment
+Art Institute of Chicago,1,3,0,1,0,0,0,1,0,0
+Millennium Park,2,1.75,1,0,0,1,1,0,1,0
+Cloud Gate,3,0.5,1,1,0,1,1,0,0,0
+Wrigley Field,4,0.75,0,0,0,0,0,0,0,1
+Museum of Science and Industry,5,4,0,0,0,1,0,1,0,0
+360 Chicago,6,2,1,0,0,1,1,0,0,0
+The Field Museum,7,3.5,0,0,1,1,0,1,0,0
+Lakefront Trail,8,2,1,0,0,1,1,0,1,0
+Willis Tower Skydeck,9,2,1,0,0,1,1,0,0,0
+Richard H. Driehaus Museum,10,1.75,1,1,1,0,0,1,0,0
+Chicago Cultural Center,11,2,0,1,0,0,0,1,0,0
+Maggie Daley Park,12,1.25,0,0,0,1,1,0,1,0
+Lincoln Park Zoo,13,2.5,0,0,0,1,0,0,1,0
+Chicago Riverwalk,14,1.5,1,0,0,1,1,0,0,0
+The Chicago Theatre,15,0.5,1,1,0,0,1,0,0,1
+Oriental Institute Museum,16,1.5,0,0,1,0,0,1,0,0
+Shedd Aquarium,17,4,0,0,0,1,0,1,1,0
+United Center,18,0.75,0,0,0,0,0,0,0,1
+University of Chicago,19,1.5,1,0,1,0,1,0,0,0
+Lincoln Park,20,1.25,0,0,0,1,0,0,1,0
+Money Museum at the Federal Reserve Bank,21,1.75,0,0,1,0,0,1,0,0
+Chicago History Museum,22,2,0,0,1,0,0,1,0,0
+Navy Pier,23,1.5,1,0,0,0,1,0,0,0
+Grant Park,24,1.25,1,0,0,1,1,0,1,0
+Picasso Statue,25,0.25,0,1,0,0,1,0,0,0
+Chicago Children's Museum,26,2.5,0,0,0,1,0,1,0,0
+Adler Planetarium,27,3,0,0,0,1,0,1,0,0
+Museum of Contemporary Art,28,2.5,1,1,0,0,0,1,0,0
+North Avenue Beach,29,1,0,0,0,1,0,0,1,0
+National Museum of Mexican Art,30,2,0,1,0,0,0,1,0,0
+Chinatown,31,1.5,1,1,0,0,0,0,0,0
+DuSable Museum of African American History,32,1.5,0,0,1,0,0,1,0,0
