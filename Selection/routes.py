@@ -11,7 +11,7 @@ from booking_scraper import booking
 
 AIRBNB = airbnb('2017-06-06', '2017-06-08', 50, 200)
 BOOKING = booking('2017-06-06', '2017-06-08', 50, 200)
-LOCATIONS = AIRBNB.append(BOOKING)
+LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
 
 TOMORROW = datetime.date.today() + datetime.timedelta(days=1)
 T = datetime.datetime.combine(TOMORROW, datetime.time(10,0))
