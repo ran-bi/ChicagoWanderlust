@@ -26,11 +26,11 @@ class RecommendationForm(forms.Form):
 		    required=False)
 	pricemin = forms.IntegerField(
 			label='Minimum Price',
-			help_text='e.g. 50',
+			help_text='e.g. 100',
 			required=False)
 	pricemax = forms.IntegerField(
 			label='Maximum Price',
-			help_text='e.g. 100',
+			help_text='e.g. 500',
 			required=False)
 	attraction = forms.MultipleChoiceField(
 		    label='Attractions Preferences',
@@ -38,7 +38,7 @@ class RecommendationForm(forms.Form):
 		    widget=forms.CheckboxSelectMultiple,
 		    required=False)
 	trans = forms.ChoiceField(
-		    label='Transportation Type Preference',
+		    label='Transportation',
 		    choices=TRANS,
 		    required=True)
 
