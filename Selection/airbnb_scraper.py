@@ -20,7 +20,7 @@ def airbnb(checkin, checkout, min_price, max_price):
 	for result in search_results:
 		listing = {}
 #		listing['ranking'] = rank
-		listing['cord'] = (float(result['listing']['lat']), float(result['listing']['lng']))
+		listing['coord'] = (float(result['listing']['lat']), float(result['listing']['lng']))
 		listing['name'] = result['listing']['name']
 #		listing['reviews_count'] = result['listing']['reviews_count']
 		listing['price'] = int(result['pricing_quote']['rate_with_service_fee']['amount'])

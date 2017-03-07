@@ -38,7 +38,7 @@ def booking(checkin, checkout, minprice, maxprice):
 	page_count = 1
 
 	driver = webdriver.Chrome()
-	driver.set_page_load_timeout(10)
+	driver.set_page_load_timeout(30)
 
 
 	r = requests.post(url, payload, headers=head)
@@ -79,9 +79,10 @@ def booking(checkin, checkout, minprice, maxprice):
 
 	df = pd.DataFrame(hotels)
 	selected = df[df.price.between(minprice, maxprice, inclusive = True)]
-
-
-	return selected
+	if len(selected) < 50:
+		return selected
+	else:
+		return selected[:50,:]
 
 
 

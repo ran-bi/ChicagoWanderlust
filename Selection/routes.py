@@ -9,18 +9,16 @@ import ast
 from airbnb_scraper import airbnb
 from booking_scraper import booking
 
-AIRBNB = airbnb('2017-06-06', '2017-06-08', 50, 200)
-BOOKING = booking('2017-06-06', '2017-06-08', 50, 200)
+AIRBNB = airbnb(datetime.datetime(2017,6,6), datetime.datetime(2017,6,8), 50, 400)
+BOOKING = booking(datetime.datetime(2017,6,6), datetime.datetime(2017,6,8), 50, 400)
 LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
 
 
 TOMORROW = datetime.date.today() + datetime.timedelta(days=1)
 T = datetime.datetime.combine(TOMORROW, datetime.time(10,0))
 
-
 ATTRACTIONS = pd.read_csv('Attraction List.csv', index_col = 'Identifier')
 TRANSIT_MODE = 'driving'
-TRANSIT_MODE = 'transit'
 
 def transit_time(start_index, end_index, start_df, end_df):
     '''
