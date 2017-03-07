@@ -184,7 +184,7 @@ def route_from_hotels(locations, all_to_visit, routes, day=1):
             #Day 2
             day_two_to_visit = route[1]
             [(next_spot_2, to_visit_2), t_init_2] = decide_next_spot(location, day_two_to_visit, LOCATIONS, ATTRACTIONS)
-            route_2, t_2 = single_day_route([next_spot_2], day_two_to_visit)
+            route_2, t_2 = single_day_route([next_spot_2], to_visit_2)
             d["day 2 route"] = route_2
             t_end_2 = transit_time(route_2[-1][0], location, ATTRACTIONS, LOCATIONS)
             day_two_t = t_init_2 + t_2 + t_end_2
