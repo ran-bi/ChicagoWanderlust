@@ -9,15 +9,12 @@ from datetime import datetime
 
 
 def booking(checkin, checkout, minprice, maxprice):
-	checkin_monthday = checkin[-2:]
-	checkin_year_month = checkin[:-3]
-	checkout_monthday = checkout[-2:]
-	checkout_year_month = checkout[:-3]
 
-	date_format = "%Y-%m-%d"
-	checkindate = datetime.strptime(checkin, date_format)
-	checkoutdate = datetime.strptime(checkout, date_format)
-	delta = checkoutdate - checkindate
+	checkin_monthday = checkin.strftime('%d')
+	checkin_year_month = checkin.strftime('%Y-%m')
+	checkout_monthday = checkout.strftime('%d')
+	checkout_year_month = checkout.strftime('%Y-%m')
+	delta = checkout - checkin
 
 	url = "http://www.booking.com/searchresults.html"
 	payload = {
@@ -49,7 +46,7 @@ def booking(checkin, checkout, minprice, maxprice):
 	nextpage = True
 
 
-	while page_count < 5 and nextpage:
+	while page_count < 6 and nextpage:
 		driver.get(searchlink)
 		html = driver.page_source
 		soup = BeautifulSoup(html, "lxml")
@@ -57,8 +54,8 @@ def booking(checkin, checkout, minprice, maxprice):
 		for table in tables:
 			raw_url = table.a.get('href')
 			raw_name = table.find('span', {'class': 'sr-hotel__name'})
-			raw_rating = table.find("span", {"class" : "average"})
-			raw_review = table.find('span', {'class': 'score_from_number_of_reviews'})
+#			raw_rating = table.find("span", {"class" : "average"})
+#			raw_review = table.find('span', {'class': 'score_from_number_of_reviews'})
 			raw_price = table.find('strong', class_=re.compile('price scarcity_color'))
 			raw_coord = table.find_all('a')[1]
 
@@ -70,11 +67,11 @@ def booking(checkin, checkout, minprice, maxprice):
 			hotel['price'] = float(raw_price.find('b').text.strip()[3:].replace(",", "")) / delta.days if raw_price else None
 			hotel['coord'] = tuple([float(i) for i in raw_coord.get('data-coords').split(",")]) if raw_coord else None
 			hotels.append(hotel)
-#			print(hotel['name'])
+			print(hotel['name'])
 
 		raw_nextpage = soup.select('a[class*=paging-next]')
 		nextpage = 'http://www.booking.com' + raw_nextpage[0].get('href') if raw_nextpage else None
-#		print(nextpage)
+		print(nextpage)
 		page_count += 1
 		searchlink = nextpage if nextpage else None
 
@@ -88,7 +85,17 @@ def booking(checkin, checkout, minprice, maxprice):
 
 
 
+'''
+	checkin_monthday = checkin[-2:]
+	checkin_year_month = checkin[:-3]
+	checkout_monthday = checkout[-2:]
+	checkout_year_month = checkout[:-3]
 
+	date_format = "%Y-%m-%d"
+	checkindate = datetime.strptime(checkin, date_format)
+	checkoutdate = datetime.strptime(checkout, date_format)
+	delta = checkoutdate - checkindate
+'''
 
 
 
