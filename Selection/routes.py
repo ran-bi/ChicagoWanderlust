@@ -94,18 +94,12 @@ def select_attraction(df, pref1=None, pref2=None, pref3=None, day=1):
             selected.append((row[0], row[2]))
             print(row[1])
 
-            
-###to be replaced
-'''
-def dummy(i, j):
-    random.seed(j)
-    return random.randint(1,30)
-'''
 
 #input: list of tuples
 #recursion
 
-def decide_next_spot(start_point, to_visit, start_df, to_df):
+def decide_next_spot(start_point, to_visit_, start_df, to_df):
+    to_visit = to_visit_[:]
     next_ = 0
     min_ = transit_time(start_point, to_visit[next_][0], start_df, to_df)
     for i in range(1, len(to_visit)):
@@ -121,7 +115,7 @@ def decide_next_spot(start_point, to_visit, start_df, to_df):
 
 def single_day_route(visited, to_visit, travel_t = 0):  
     if len(to_visit) == 0:
-        return visited+to_visit, travel_t
+        return visited, travel_t
     
     [(next_spot, to_visit), t] = decide_next_spot(visited[-1][0], to_visit, ATTRACTIONS, ATTRACTIONS)
     visited.append(next_spot)
