@@ -7,8 +7,8 @@ import statistics
 import csv
 import re
 import ast
-from airbnb_scraper import airbnb
-from booking_scraper import booking
+from scrapers import airbnb, booking
+
 
 AIRBNB = airbnb(datetime.datetime(2017,6,6), datetime.datetime(2017,6,8), 50, 400)
 BOOKING = booking(datetime.datetime(2017,6,6), datetime.datetime(2017,6,8), 50, 400)
