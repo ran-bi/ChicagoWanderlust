@@ -83,7 +83,8 @@ def select_attraction(df, pref1=None, pref2=None, pref3=None, day=1):
             for j in range(1, pref_n):
                 select = select & prefs[j][c[j]]
             df_select = df[select]
-                        
+        
+        similar = 0               
         for row in df_select.itertuples():
             sum_hours += row[2]
             if sum_hours > threshold[1]:
@@ -92,7 +93,9 @@ def select_attraction(df, pref1=None, pref2=None, pref3=None, day=1):
                     continue
                 return selected
             selected.append((row[0], row[2]))
-            print(row[1])
+            similar += 1
+            if i < 2**pref_n-1 and similar > 1:
+                break
 
 
 #input: list of tuples
