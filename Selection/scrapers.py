@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-def airbnb(checkin, checkout, min_price, max_price):
+def airbnb(checkin, checkout, min_price, max_price, toprate=15):
 	checkin = checkin.strftime('%Y-%m-%d')
 	checkin = checkin.replace('-','%2D')
 	checkout = checkout.strftime('%Y-%m-%d')
@@ -36,9 +36,9 @@ def airbnb(checkin, checkout, min_price, max_price):
 
 	df = pd.DataFrame(all_listings)
 
-	return df
+	return df.iloc[:toprate, :]
 
-def booking(checkin, checkout, minprice, maxprice):
+def booking(checkin, checkout, minprice, maxprice, toprate=15):
 
 	checkin_monthday = checkin.strftime('%d')
 	checkin_year_month = checkin.strftime('%Y-%m')
@@ -76,7 +76,7 @@ def booking(checkin, checkout, minprice, maxprice):
 	nextpage = True
 
 
-	while page_count < 6 and nextpage:
+	while page_count < 5 and nextpage:
 		driver.get(searchlink)
 		html = driver.page_source
 		soup = BeautifulSoup(html, "lxml")
@@ -109,9 +109,9 @@ def booking(checkin, checkout, minprice, maxprice):
 
 	df = pd.DataFrame(hotels)
 	selected = df[df.price.between(minprice, maxprice, inclusive = True)]
-	if len(selected) < 50:
+	if len(selected) < toprate:
 		return selected
 	else:
-		return selected.iloc[:50,:]
+		return selected.iloc[:toprate,:]
 
 

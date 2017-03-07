@@ -33,7 +33,7 @@ def transit_time(start_index, end_index, start_df, end_df):
         transit_time: mints integer
     '''
 
-    gmaps = googlemaps.Client(key='AIzaSyAHwQ4YfTBWZaC2y0XmgY8JtmIIC-F49bE')
+    gmaps = googlemaps.Client(key='AIzaSyD66buWs6nFYSamGvVmSYrZ_yXtf9sC5Y8')
     start_point = start_df.loc[start_index][0]
     end_point = end_df.loc[end_index][0]
     distance_result = gmaps.distance_matrix(start_point, end_point, mode=TRANSIT_MODE, departure_time=T)
