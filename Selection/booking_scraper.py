@@ -82,7 +82,7 @@ def booking(checkin, checkout, minprice, maxprice):
 	if len(selected) < 50:
 		return selected
 	else:
-		return selected[:50,:]
+		return selected.iloc[:50,:]
 
 
 

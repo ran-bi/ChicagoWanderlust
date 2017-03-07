@@ -3,6 +3,7 @@ import numpy as np
 import random
 import googlemaps
 import datetime
+import statistics
 import csv
 import re
 import ast
@@ -200,4 +201,21 @@ def route_from_hotels(locations, all_to_visit, routes, day=1):
     return travel_info
 
 
-  
+def filter_output(output, n): # for flexibility, mean+n*sd
+    t_l = []
+    filter_l = []
+    filter_output = {}
+    for key in output:
+        t = output[key]["total travel time"]       
+        t_l += [t]
+    t_mean = statistics.mean(t_l)
+    t_sd = statistics.stdev(t_l)
+    t_benchmark = t_mean - n*t_sd
+    for key in output:
+        t = output[key]["total travel time"]
+        if t <= t_benchmark:
+            filter_l += [key]
+    for i in filter_l:
+        filter_output[i] = output[i]
+        
+    return (filter_output)  

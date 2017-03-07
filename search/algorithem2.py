@@ -1,4 +1,3 @@
-from . import booking_scraper
 
 def foof(data):
 	CHECKIN = data['checkin']
