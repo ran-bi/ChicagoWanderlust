@@ -11,22 +11,16 @@ from booking_scraper import booking
 
 AIRBNB = airbnb('2017-06-06', '2017-06-08', 50, 200)
 BOOKING = booking('2017-06-06', '2017-06-08', 50, 200)
-LOCATIONS = AIRBNB.append(BOOKING)
+LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
 
 
-CHECKIN = datetime.date(2017,6,6)
-T = datetime.datetime.combine(CHECKIN, datetime.time(10,0))
-DEPARTURE = (T-datetime.datetime(1970,1,1)).total_seconds()
+TOMORROW = datetime.date.today() + datetime.timedelta(days=1)
+T = datetime.datetime.combine(TOMORROW, datetime.time(10,0))
+
 
 ATTRACTIONS = pd.read_csv('Attraction List.csv', index_col = 'Identifier')
 TRANSIT_MODE = 'driving'
 TRANSIT_MODE = 'transit'
-
-
-def transform_checkindate(CHECKIN):
-    t = datetime.datetime.combine(CHECKIN, datetime.time(10,0))
-    departure_time = (t-datetime.datetime(1970,1,1)).total_seconds()
-    return departure_time
 
 def transit_time(start_index, end_index, start_df, end_df):
     '''
@@ -43,8 +37,7 @@ def transit_time(start_index, end_index, start_df, end_df):
     gmaps = googlemaps.Client(key='AIzaSyAHwQ4YfTBWZaC2y0XmgY8JtmIIC-F49bE')
     start_point = start_df.loc[start_index][0]
     end_point = end_df.loc[end_index][0]
-    now = datetime.now()
-    distance_result = gmaps.distance_matrix(start_point, end_point, mode=TRANSIT_MODE, departure_time=DEPARTURE)
+    distance_result = gmaps.distance_matrix(start_point, end_point, mode=TRANSIT_MODE, departure_time=T)
     time_element = distance_result['rows'][0]['elements'][0]['duration']['text']
     time_element = time_element.replace('s','')
     time_element = time_element.replace('min','')

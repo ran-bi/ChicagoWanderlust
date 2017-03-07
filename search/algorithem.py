@@ -16,15 +16,6 @@ def foof(data):
 
 	return (criteris_met,context)
 
-def process(data):
-	context ={'checkin': data['pricemax'],
-	'checkout': data['pricemin'],
-	'pricemin': data['trans']}
-
-	return context
-
-
-
 
 
 
@@ -51,3 +42,7 @@ def process(data):
 	'checkout': rv['name'][2],
 	'pricemin': rv['url'][2]}
 '''
+=======
+	context = data
+    return (criteris_met,context)
+>>>>>>> 01ecc2b60ba1ba412d735b19d644b354dca95a11
