@@ -76,7 +76,7 @@ def booking(checkin, checkout, minprice, maxprice, toprate=15):
 	nextpage = True
 
 
-	while page_count < 5 and nextpage:
+	while page_count < 4 and nextpage:
 		driver.get(searchlink)
 		html = driver.page_source
 		soup = BeautifulSoup(html, "lxml")
