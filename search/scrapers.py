@@ -90,7 +90,7 @@ def booking(checkin, checkout, minprice, maxprice, toprate=15):
 			raw_coord = table.find_all('a')[1]
 
 			hotel = {}
-			hotel['url'] = 'www.booking.com' + raw_url if raw_url else None
+			hotel['url'] = 'http://www.booking.com' + raw_url if raw_url else None
 			hotel['name'] = raw_name.text.strip() if raw_name else None
 #			hotel['rating'] = float(raw_rating.text.strip()) if raw_rating else None
 #			hotel['review'] = raw_review.text.strip().split()[0] if raw_review else None

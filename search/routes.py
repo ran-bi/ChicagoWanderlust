@@ -36,7 +36,7 @@ def transit_time(start_index, end_index, start_df, end_df, transit_mode):
         transit_time: mints integer
     '''
 
-    gmaps = googlemaps.Client(key='AIzaSyCaHWPcxxYS4MCt9eLILdU7E0rdsmiBVSc')
+    gmaps = googlemaps.Client(key='AIzaSyAPcgnJyQcEmfd19G8-0TFrJTSx4hXdUCg')
     start_point = start_df.loc[start_index][0]
     end_point = end_df.loc[end_index][0]
     print(start_point, end_point)

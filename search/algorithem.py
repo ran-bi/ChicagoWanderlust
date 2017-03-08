@@ -1,6 +1,6 @@
 
 from .scrapers import airbnb, booking
-from .routes import select_by_routes
+from .routes import select_by_routes, ATTRACTIONS
 from .yelp_filter import get_filter_l
 from .safety_filter import filter_danger
 from .final_format import get_final_output
@@ -16,8 +16,8 @@ def foof(data):
     DAYS = cal_days(CHECKIN, CHECKOUT)
 
     default_output = {'BookingLink1': 'https://www.airbnb.com/rooms/15926166',
-'BookingLink2': 'www.booking.com/hotel/us/omni-chicago.en-gb.html?label=gen173nr-1FCAQoggJCDWNpdHlfMjAwMzMxNzNIM2IFbm9yZWZyBXVzX2lsiAEBmAEuuAEKyAEF2AEB6AEB-AELqAID;sid=28e69b52be3281ae5b7ba8b2459908ad;ucfs=1;highlighted_blocks=137190405_86519026_2_0_0;all_sr_blocks=137190405_86519026_2_0_0;room1=A%2CA;hpos=38;dest_type=city;dest_id=20033173;srfid=4a03b0b55938edff661815f856f13538dd1a32faX53;from=searchresults;highlight_room=',
-'BookingLink3': 'www.booking.com/hotel/us/majestic.en-gb.html?label=gen173nr-1FCAQoggJCDWNpdHlfMjAwMzMxNzNIM2IFbm9yZWZyBXVzX2lsiAEBmAEuuAEKyAEF2AEB6AEB-AELqAID;sid=28e69b52be3281ae5b7ba8b2459908ad;ucfs=1;highlighted_blocks=5670701_91458826_0_1_0;all_sr_blocks=5670701_91458826_0_1_0;room1=A%2CA;hpos=7;dest_type=city;dest_id=20033173;srfid=4a03b0b55938edff661815f856f13538dd1a32faX62;from=searchresults;highlight_room=',
+'BookingLink2': 'http://www.booking.com/hotel/us/omni-chicago.en-gb.html?l',
+'BookingLink3': 'http://www.booking.com/hotel/us/majestic.en-gb.html?',
 'BookingLink4': 'https://www.airbnb.com/rooms/1056430',
 'Hotel1': 'Private Room, Private Neighborhood, Great Location',
 'Hotel2': 'Omni Chicago Hotel',
@@ -60,14 +60,14 @@ def foof(data):
     except:
         find_error = True
     try:
-        loc = filter_danger(loc_lst, LOCATIONS, loc_routes)
+    	loc = filter_danger(loc_lst, LOCATIONS, loc_routes)
     except: 
         find_error = True
-    
+	    
     if find_error:
         return (True, default_output)
     else:
-        context = get_final_output(loc, loc_routes, routes.ATTRACTIONS, LOCATIONS)
+        context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
         criteris_met = True
         return (criteris_met,context)
 
