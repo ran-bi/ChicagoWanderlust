@@ -199,10 +199,10 @@ def route_from_hotels(locations, all_to_visit, routes, day=1):
         travel_info[location] = d
     return travel_info
 
-def algorithm(ATTRACTIONS, prefs, locations, day, transit_mode):
+def algorithm(prefs, LOCATIONS, day, transit_mode):
     all_to_visit = select_attraction(ATTRACTIONS, prefs, day)
     routes = start_place_and_routes(all_to_visit, day)
-    d = route_from_hotels(locations, all_to_visit, routes, day)
+    d = route_from_hotels(range(len(LOCATIONS)), all_to_visit, routes, day)
     return d
 
 def filter_output(output, n): # for flexibility, mean+n*sd
