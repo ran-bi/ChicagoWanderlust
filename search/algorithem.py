@@ -15,15 +15,15 @@ def foof(data):
     PREFS = data['attraction']
     DAYS = cal_days(CHECKIN, CHECKOUT)
 
-    default_output = {'BookingLink1': 'https://www.airbnb.com/rooms/15926166',
+    default_output = {'BookingLink1': 'https://www.airbnb.com/rooms/14169205',
 'BookingLink2': 'http://www.booking.com/hotel/us/omni-chicago.en-gb.html?l',
 'BookingLink3': 'http://www.booking.com/hotel/us/majestic.en-gb.html?',
 'BookingLink4': 'https://www.airbnb.com/rooms/1056430',
-'Hotel1': 'Private Room, Private Neighborhood, Great Location',
+'Hotel1': 'SUNNY ROOM & FREE PARKING 5 MIN TO WILLIS TOWER',
 'Hotel2': 'Omni Chicago Hotel',
 'Hotel3': 'Majestic Hotel',
 'Hotel4': 'Charming space in Boystown/Lakeview',
-'Price1': 62.0,
+'Price1': 87.0,
 'Price2': 88.0,
 'Price3': 282.0,
 'Price4': 106.0,
