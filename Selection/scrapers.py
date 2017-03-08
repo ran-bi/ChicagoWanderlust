@@ -95,7 +95,8 @@ def booking(checkin, checkout, minprice, maxprice, toprate=15):
 #			hotel['rating'] = float(raw_rating.text.strip()) if raw_rating else None
 #			hotel['review'] = raw_review.text.strip().split()[0] if raw_review else None
 			hotel['price'] = float(raw_price.find('b').text.strip()[3:].replace(",", "")) / delta.days if raw_price else None
-			hotel['coord'] = tuple([float(i) for i in raw_coord.get('data-coords').split(",")]) if raw_coord else None
+			coord = tuple([float(i) for i in raw_coord.get('data-coords').split(",")]) if raw_coord else None
+			hotel['coord'] = (coord[1], coord[0]) if coord else None
 			hotels.append(hotel)
 			print(hotel['name'])
 

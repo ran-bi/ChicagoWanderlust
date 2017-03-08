@@ -3,11 +3,12 @@ import statistics
 # import ast
 
 # output sample
+'''
 output = {8: {'total travel time': 181, 'day 1 route': [(29, 1.0), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (24, 1.25), (2, 1.75), (20, 1.25)]}, \
 1: {'total travel time': 167, 'day 1 route': [(17, 4.0), (8, 2.0)], 'day 2 route': [(13, 2.5), (12, 1.25), (29, 1.0), (24, 1.25), (2, 1.75), (20, 1.25)]}, \
 20: {'total travel time': 223, 'day 1 route': [(24, 1.25), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (2, 1.75), (20, 1.25)]}, \
  39: {'total travel time': 179, 'day 1 route': [(2, 1.75), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (24, 1.25), (20, 1.25)]}}
-
+'''
 # params["limit"]
 def get_search_parameters(lat,lon):
     #See the Yelp API for more details
@@ -47,32 +48,39 @@ def get_food_index(index,df_location):
     lat, lon = df_location.loc[index][0]
     # lat, lon = ast.literal_eval(df_location.loc[index][0])
     restaurant_dic = get_results(get_search_parameters(lat,lon))
-    limit_num = 10
-    l = []
-    for i in range(limit_num):
-        rating = restaurant_dic['businesses'][i]['rating']
-        review_count = restaurant_dic['businesses'][i]['review_count']
-        a = [(rating, review_count)]
-        l = l + a
+    if 'businesses' not in restaurant_dic:
+        return None
+    else:
+        limit_num = 10
+        l = []
+        for i in range(limit_num):
 
-    rating_l = []
-    review_count_l = []
-    for i in l:
-        rating, review_count = i
-        rating_l += [rating]
-        review_count_l += [review_count]
-    rating = statistics.mean(rating_l)
-    review = statistics.mean(review_count_l)
+                rating = restaurant_dic['businesses'][i]['rating']
+                review_count = restaurant_dic['businesses'][i]['review_count']
+                a = [(rating, review_count)]
+                l = l + a
 
-    return (rating,review)
+        rating_l = []
+        review_count_l = []
+        for i in l:
+            rating, review_count = i
+            rating_l += [rating]
+            review_count_l += [review_count]
+        rating = statistics.mean(rating_l)
+        review = statistics.mean(review_count_l)
+
+        return (rating,review)
 
 def get_mean_sd(output, df_location, n): # for flexibility, mean+n*sd
     rating_l = []
     review_l = []
     for key in output:
-        rating, review = get_food_index(key, df_location)
-        rating_l += [rating]
-        review_l += [review]
+        rv = get_food_index(key, df_location)
+        if rv:
+            rating, review = rv
+            rating_l += [rating]
+            review_l += [review]
+
     rating_mean = statistics.mean(rating_l)
     review_mean = statistics.mean(review_l)
     rating_sd = statistics.stdev(rating_l)
@@ -82,10 +90,13 @@ def get_mean_sd(output, df_location, n): # for flexibility, mean+n*sd
 def get_filter_l(output, df_location, n): # for flexibility, mean+n*sd
     filter_l = []
     for key in output:
-        rating, review = get_food_index(key, df_location)
-        rating_benchmark, review_benchmark = get_mean_sd(output, df_location, n)
-        if rating >= rating_benchmark and review >= review_benchmark:
-            filter_l += [key]
+        print(key)
+        rv = get_food_index(key, df_location)
+        if rv:
+            rating, review = rv
+            rating_benchmark, review_benchmark = get_mean_sd(output, df_location, n)
+            if rating >= rating_benchmark and review >= review_benchmark:
+                filter_l += [key]
     return filter_l
 
 
