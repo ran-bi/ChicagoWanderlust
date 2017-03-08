@@ -94,7 +94,7 @@ def get_filter_l(output, df_location, n): # for flexibility, mean+n*sd
         print(key)
         rv = get_food_index(key, df_location)
         if rv:
-            rating, review = rv
+            rating, review = rv            
             if rating >= rating_benchmark and review >= review_benchmark:
                 filter_l += [key]
     return filter_l
