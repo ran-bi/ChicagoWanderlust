@@ -36,7 +36,7 @@ def transit_time(start_index, end_index, start_df, end_df):
     gmaps = googlemaps.Client(key='AIzaSyCaHWPcxxYS4MCt9eLILdU7E0rdsmiBVSc')
     start_point = start_df.loc[start_index][0]
     end_point = end_df.loc[end_index][0]
-    print(start_point, end_point)
+    #print(start_point, end_point)
     distance_result = gmaps.distance_matrix(start_point, end_point, mode=TRANSIT_MODE, departure_time=T)
     time_element = distance_result['rows'][0]['elements'][0]['duration']['text']
     time_element = time_element.replace('s','')
@@ -49,29 +49,29 @@ def transit_time(start_index, end_index, start_df, end_df):
         transit_time = int(h)*60 + int(m)
     else:
         transit_time = int(time_element)
-    print(transit_time)
+    #print(transit_time)
     return transit_time
 
-def select_attraction(df, pref1=None, pref2=None, pref3=None, day=1):   
+def select_attraction(df, pref_input, day=1):   
     if day == 1:
         threshold = (6, 8)  #[6,8]
     else:
         threshold = (12, 15)  #[12,15]
-        
+    
+    pref_n = len(pref_input)
+    
     prefs = []
     sum_hours = 0
     selected = []
   
-    if pref1 is not None:
-        prefs.append([df[pref1] == 1, df[pref1] == 0])
+    if pref_n >= 1:
+        prefs.append([df[pref_input[0]] == 1, df[pref_input[0]] == 0])
         
-        if pref2 is not None:
-            prefs.append([df[pref2] == 1, df[pref2] == 0])
+        if pref_n >= 2:
+            prefs.append([df[pref_input[1]] == 1, df[pref_input[1]] == 0])
         
-            if pref3 is not None:
-                prefs.append([df[pref3] == 1, df[pref3] == 0])
-    
-    pref_n = len(prefs)
+            if pref_n >= 3:
+                prefs.append([df[pref_input[2]] == 1, df[pref_input[2]] == 0])
     
     criteria = [[[0],[1]],[(0,0),(0,1),(1,0),(1,1)],
                 [(0,0,0),(0,0,1),(0,1,0),(1,0,0),(0,1,1),(1,0,1),(1,1,0),(1,1,1)]]
@@ -199,6 +199,11 @@ def route_from_hotels(locations, all_to_visit, routes, day=1):
         travel_info[location] = d
     return travel_info
 
+def algorithm(ATTRACTIONS, prefs, locations, day, transit_mode):
+    all_to_visit = select_attraction(ATTRACTIONS, prefs, day)
+    routes = start_place_and_routes(all_to_visit, day)
+    d = route_from_hotels(locations, all_to_visit, routes, day)
+    return d
 
 def filter_output(output, n): # for flexibility, mean+n*sd
     t_l = []
