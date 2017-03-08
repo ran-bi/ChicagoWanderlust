@@ -88,13 +88,13 @@ def get_mean_sd(output, df_location, n): # for flexibility, mean+n*sd
     return (rating_mean+n*rating_sd, review_mean+n*review_sd)
 
 def get_filter_l(output, df_location, n): # for flexibility, mean+n*sd
+    rating_benchmark, review_benchmark = get_mean_sd(output, df_location, n)
     filter_l = []
     for key in output:
         print(key)
         rv = get_food_index(key, df_location)
         if rv:
             rating, review = rv
-            rating_benchmark, review_benchmark = get_mean_sd(output, df_location, n)
             if rating >= rating_benchmark and review >= review_benchmark:
                 filter_l += [key]
     return filter_l

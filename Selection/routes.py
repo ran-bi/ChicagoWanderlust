@@ -9,11 +9,11 @@ import re
 import ast
 from scrapers import airbnb, booking
 
-'''
-AIRBNB = airbnb(datetime.datetime(2017,6,6), datetime.datetime(2017,6,8), 50, 400)
-BOOKING = booking(datetime.datetime(2017,6,6), datetime.datetime(2017,6,8), 50, 400)
+
+AIRBNB = airbnb(datetime.datetime(2017,4,20), datetime.datetime(2017,4,22), 50, 400)
+BOOKING = booking(datetime.datetime(2017,4,20), datetime.datetime(2017,4,22), 50, 400)
 LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
-'''
+
 
 TOMORROW = datetime.date.today() + datetime.timedelta(days=1)
 T = datetime.datetime.combine(TOMORROW, datetime.time(10,0))
@@ -33,7 +33,7 @@ def transit_time(start_index, end_index, start_df, end_df):
         transit_time: mints integer
     '''
 
-    gmaps = googlemaps.Client(key='AIzaSyD66buWs6nFYSamGvVmSYrZ_yXtf9sC5Y8')
+    gmaps = googlemaps.Client(key='AIzaSyCaHWPcxxYS4MCt9eLILdU7E0rdsmiBVSc')
     start_point = start_df.loc[start_index][0]
     end_point = end_df.loc[end_index][0]
     print(start_point, end_point)
