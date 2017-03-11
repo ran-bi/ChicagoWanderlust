@@ -36,7 +36,7 @@ def foof(data):
     LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
 
     try:
-    loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
+        loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
     except:
         context = 'Please use another Google API Key in routes.py'
         return (False, context)
@@ -86,7 +86,12 @@ def check_days(data):
     checkout = data['checkout']
     delta = checkout - checkin
     days = delta.days
-    if days > 0 and days <= 2:
+
+    if (checkin - datetime.date.today()).days > 150:
+        return False
+    elif (checkin - datetime.date.today()).days < 0:
+        return False
+    elif days > 0 and days <= 2:
         return (checkin, checkout, 1)
     elif days > 2 and days <= 10:
         return (checkin, checkout, 2)
