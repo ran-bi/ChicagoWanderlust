@@ -110,7 +110,9 @@ def select_attraction(df, pref_input, day=1):
                 return selected
             selected.append((row[0], row[2]))
             similar += 1
-            if i < 2**pref_n-1 and similar > 1:
+            if i == 0 and similar > 3:
+                break
+            if 0 < i < 2**pref_n-1 and similar > 1:
                 break
 
 
