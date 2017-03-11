@@ -43,6 +43,7 @@ def get_final_output(index_list, output, df_spots, df_location):
         final_output["Hotel"+str(i+1)] = df_location.loc[index_list[i]]['name']
         final_output['Price'+str(i+1)] = df_location.loc[index_list[i]]['price']
         final_output['BookingLink'+str(i+1)] = df_location.loc[index_list[i]]['url']
+        final_output['Coord'+str(i+1)] = df_location.loc[index_list[i]]['coord']
         final_output['Route'+str(i+1)] = get_route(index_list[i], output, df_spots)
 
     if l < 5:
@@ -50,6 +51,7 @@ def get_final_output(index_list, output, df_spots, df_location):
             final_output["Hotel"+str(i)] = ''
             final_output['Price'+str(i)] = ''
             final_output['BookingLink'+str(i)] = ''
+            final_output['Coord'+str(i)] = ''
             final_output['Route'+str(i)] = ''
 
     return final_output
