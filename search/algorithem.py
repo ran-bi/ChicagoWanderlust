@@ -36,7 +36,7 @@ def foof(data):
     LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
 
     try:
-    loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
+	loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
     except:
         context = 'Please use another Google API Key in routes.py'
         return (False, context)
