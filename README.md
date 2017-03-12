@@ -15,7 +15,7 @@ python3 manage.py runserver
 
 ## Installation
 
-**Python packages required:
+**Python packages required:**
 - BeautifulSoup
 - Django==1.10.5
 - django-bootstrap-form==3.2.1
@@ -33,8 +33,8 @@ Describe and show how to run the tests with code examples.
 
 ## Contributors
 
-Ran Bi
-Weijie Xin
-Leping Yu
+Ran Bi,
+Weijie Xin,
+Leping Yu,
 Minjia Zhu
 @Uchicago Harris, CAPP
