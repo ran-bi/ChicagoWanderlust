@@ -198,15 +198,15 @@ def first_day_route(visited, to_visit, transit_mode, sum_hours = 0, total_t = 0,
         sum_hours = visited[0][1]
 
     if sum_hours > 8:
-        if len(to_visit) > 0:
-            place = visited.pop()
-            popped.append(place)
-            sum_hours -= place[1]
-            total_t -= t     
-            if sum_hours >= 6:
-                return (visited, total_t), to_visit+popped
-        else:
-            return (visited, total_t), popped
+        place = visited.pop()
+        popped.append(place)
+        sum_hours -= place[1]
+        total_t -= t     
+        if sum_hours >= 6:
+            return (visited, total_t), to_visit+popped
+        if len(to_visit) == 0:
+            total_t += STORED[(visited[-1][0],popped[0][0])]["time_"+transit_mode]
+            return (visited+popped[0], total_t), popped[1:]
    
     (next_spot, to_visit), t = decide_next_spot(visited[-1][0],
         to_visit, ATTRACTIONS, ATTRACTIONS, transit_mode, stored=True)
@@ -326,6 +326,6 @@ def select_by_routes(prefs, LOCATIONS, day, transit_mode, n=0):
     '''
     all_to_visit = select_attraction(ATTRACTIONS, prefs, day)
     routes = possible_routes(all_to_visit, transit_mode, day)
-    d = route_from_hotels(range(len(LOCATIONS)), LOCATIONS, all_to_visit, routes, transit_mode, day)
+    d = route_from_locations(range(len(LOCATIONS)), LOCATIONS, all_to_visit, routes, transit_mode, day)
     output = filter_output(d, n)
     return output
