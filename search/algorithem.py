@@ -86,10 +86,9 @@ def check_days(data):
     checkout = data['checkout']
     delta = checkout - checkin
     days = delta.days
+    delta_today = (checkin - datetime.date.today()).days
 
-    if (checkin - datetime.date.today()).days > 150:
-        return False
-    elif (checkin - datetime.date.today()).days < 0:
+    if delta_today < 0 or delta_today > 150:
         return False
     elif days > 0 and days <= 2:
         return (checkin, checkout, 1)
