@@ -8,7 +8,20 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-def airbnb(checkin, checkout, min_price, max_price, toprate=15):
+def airbnb(checkin, checkout, min_price, max_price, toprate=50):
+	'''
+	Use Airbnb unofficial API to gather apartment listing matching search criteria.
+
+	Inputs:
+		checkin: datetime.date object.
+		checkout: datetime.date object.
+		min_price: int. lower bound of price range.
+		max_price: int. upper bound of price range.
+		toprate: int. Number of results to get.
+	Output:
+		dataframe: listing information, including listing name, price, booking url and location coordinates.
+	'''
+
 	checkin = checkin.strftime('%Y-%m-%d')
 	checkin = checkin.replace('-','%2D')
 	checkout = checkout.strftime('%Y-%m-%d')
@@ -37,7 +50,19 @@ def airbnb(checkin, checkout, min_price, max_price, toprate=15):
 
 	return df.iloc[:toprate, :]
 
-def booking(checkin, checkout, minprice, maxprice, toprate=15):
+def booking(checkin, checkout, minprice, maxprice, toprate=30):
+	'''
+	Scrape booking.com to gather hotel information matching the search criteria.
+
+	Inputs:
+		checkin: datetime.date object.
+		checkout: datetime.date object.
+		min_price: int. lower bound of price range.
+		max_price: int. upper bound of price range.
+		toprate: int. Number of results to get.
+	Output:
+		dataframe: hotel information, including hotel name, price, booking url and location coordinates.
+	'''
 
 	checkin_monthday = checkin.strftime('%d')
 	checkin_year_month = checkin.strftime('%Y-%m')

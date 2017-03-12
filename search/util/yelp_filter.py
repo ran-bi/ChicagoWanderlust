@@ -7,7 +7,7 @@ import statistics
 output = {8: {'total travel time': 181, 'day 1 route': [(29, 1.0), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (24, 1.25), (2, 1.75), (20, 1.25)]}, \
 1: {'total travel time': 167, 'day 1 route': [(17, 4.0), (8, 2.0)], 'day 2 route': [(13, 2.5), (12, 1.25), (29, 1.0), (24, 1.25), (2, 1.75), (20, 1.25)]}, \
 20: {'total travel time': 223, 'day 1 route': [(24, 1.25), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (2, 1.75), (20, 1.25)]}, \
- 39: {'total travel time': 179, 'day 1 route': [(2, 1.75), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (24, 1.25), (20, 1.25)]}}
+39: {'total travel time': 179, 'day 1 route': [(2, 1.75), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (24, 1.25), (20, 1.25)]}}
 '''
 # params["limit"]
 def get_search_parameters(lat,lon):
@@ -16,10 +16,9 @@ def get_search_parameters(lat,lon):
     params["term"] = "restaurant"
     params["ll"] = "{},{}".format(str(lat),str(lon))
     params["radius_filter"] = "2000"
-    params["limit"] = "10" #Yelp will only return a max of 40 results at a time
+    params["limit"] = "20" #Yelp will only return a max of 40 results at a time
 
     return params
-
 
 def get_results(params):
 
@@ -51,7 +50,7 @@ def get_food_index(index,df_location):
     if 'businesses' not in restaurant_dic:
         return None
     else:
-        limit_num = 10
+        limit_num = 20
         l = []
         for i in range(limit_num):
 
@@ -74,27 +73,27 @@ def get_food_index(index,df_location):
 def get_mean_sd(output, df_location, n): # for flexibility, mean+n*sd
     rating_l = []
     review_l = []
+    dic = {}
     for key in output:
         rv = get_food_index(key, df_location)
         if rv:
             rating, review = rv
             rating_l += [rating]
             review_l += [review]
-
+            dic[key] = rv
     rating_mean = statistics.mean(rating_l)
     review_mean = statistics.mean(review_l)
     rating_sd = statistics.stdev(rating_l)
     review_sd = statistics.stdev(review_l)
-    return (rating_mean+n*rating_sd, review_mean+n*review_sd)
+    return (rating_mean+n*rating_sd, review_mean+n*review_sd, dic)
 
 def get_filter_l(output, df_location, n): # for flexibility, mean+n*sd
-    rating_benchmark, review_benchmark = get_mean_sd(output, df_location, n)
+    rating_benchmark, review_benchmark, dic = get_mean_sd(output, df_location, n)
     filter_l = []
     for key in output:
         print(key)
-        rv = get_food_index(key, df_location)
-        if rv:
-            rating, review = rv            
+        if key in dic:
+            rating, review = dic[key]            
             if rating >= rating_benchmark and review >= review_benchmark:
                 filter_l += [key]
     return filter_l
