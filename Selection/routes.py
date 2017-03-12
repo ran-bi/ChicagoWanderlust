@@ -110,7 +110,7 @@ def select_attraction(df, pref_input, day=1):
                 return selected
             selected.append((row[0], row[2]))
             similar += 1
-            if i == 0 and similar > 3:
+            if pref_n > 0 and i == 0 and similar > 3:
                 break
             if 0 < i < 2**pref_n-1 and similar > 1:
                 break
@@ -288,7 +288,7 @@ def route_from_locations(loc_lst, LOCATIONS, all_to_visit, routes, transit_mode,
             day_two_to_visit = route[1]
             (next_spot_2, to_visit_2), t_init_2 = decide_next_spot(location,
                 day_two_to_visit, LOCATIONS, ATTRACTIONS, transit_mode)
-            route_2, t_2 = single_day_route([next_spot_2], to_visit_2)
+            route_2, t_2 = single_day_route([next_spot_2], to_visit_2, transit_mode)
             d["day 2 route"] = route_2
             t_end_2 = transit_time(route_2[-1][0], location,
                 ATTRACTIONS, LOCATIONS, transit_mode)
