@@ -12,6 +12,15 @@ output = {8: {'total travel time': 181, 'day 1 route': [(29, 1.0), (8, 2.0), (13
 # params["limit"]
 def get_search_parameters(lat,lon):
     #See the Yelp API for more details
+    '''
+    Prepare parameteres for get_results function
+
+    Inputs:
+        lat, lon: float, latitude, longitude of the spot
+
+    Outputs:
+        params: dictionary
+    '''
     params = {}
     params["term"] = "restaurant"
     params["ll"] = "{},{}".format(str(lat),str(lon))
@@ -21,6 +30,15 @@ def get_search_parameters(lat,lon):
     return params
 
 def get_results(params):
+    '''
+    Get requested data dictionary of the restaurants from Yelp API
+
+    Inputs:
+        params: dictionary
+
+    Outputs:
+        data: dictionary
+    '''
 
     #Obtain these from Yelp's manage access page
     consumer_key = "yk-sQRKSX0mitrxx6VMN_g"
@@ -44,6 +62,16 @@ def get_results(params):
 
 # limit_num
 def get_food_index(index,df_location):
+    '''
+    Get the mean rating and review count of a spot as the food index
+
+    Inputs:
+        index: integer
+        df_location: dataframe
+
+    Outputs:
+        (rating, review): tuple of float
+    '''
     lat, lon = df_location.loc[index][0]
     # lat, lon = ast.literal_eval(df_location.loc[index][0])
     restaurant_dic = get_results(get_search_parameters(lat,lon))
@@ -70,7 +98,18 @@ def get_food_index(index,df_location):
 
         return (rating,review)
 
-def get_mean_sd(output, df_location, n): # for flexibility, mean+n*sd
+def get_benchmark(output, df_location, n): # for flexibility, mean+n*sd
+    '''
+    Get food index benchmark for the current candidate list, along with a dictionary of each spot's food index
+
+    Inputs:
+        output: candidate dictionary
+        df_location: dataframe
+        n: unit of sd, for the equation mean+n*sd
+
+    Outputs:
+        benchmark of rating, benchmark of review count, food index dictionary
+    '''
     rating_l = []
     review_l = []
     dic = {}
@@ -88,7 +127,18 @@ def get_mean_sd(output, df_location, n): # for flexibility, mean+n*sd
     return (rating_mean+n*rating_sd, review_mean+n*review_sd, dic)
 
 def get_filter_l(output, df_location, n): # for flexibility, mean+n*sd
-    rating_benchmark, review_benchmark, dic = get_mean_sd(output, df_location, n)
+    '''
+    Using food index to filter current candidate list
+
+    Inputs:
+        output: candidate dictionary
+        df_location: dataframe
+        n: unit of sd, for the equation mean+n*sd
+
+    Outputs:
+        filter_l: list of keys from output that are above food index benchmark
+    '''
+    rating_benchmark, review_benchmark, dic = get_benchmark(output, df_location, n)
     filter_l = []
     for key in output:
         print(key)
