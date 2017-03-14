@@ -36,6 +36,7 @@ def recommend(data):
 
     try:
         AIRBNB = airbnb(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
+        print('AIRBNB request done.')
         
     except:
         context = {'error':'Please check internet connection'}
@@ -43,12 +44,14 @@ def recommend(data):
 
     try:
         BOOKING = booking(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
+        print('Booking.com scraping done.')
         
     except:
         context = {'error': 'Please check internet connection and make sure Chrome webderiver works properly'}
         return (False, context)
 
     LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
+    
 
     try:
         loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
@@ -59,20 +62,22 @@ def recommend(data):
     
     try:
         loc_lst = get_filter_l(loc_routes, LOCATIONS, -1)
+        print ('Yelp filter done.')
         
     except:
         context = {'error':'Please check Yelp API Key'}
         return (False, context)
 
     loc = filter_danger(loc_lst, LOCATIONS, loc_routes)
+    print ('Security check done.')
 
     if loc == []:
     	context = {'error': 'No search result matching your input. Please refine your input.'}
     	return (False, context)
     else:
-    	context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
-        print(context)
-    	return (True, context)
+        context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
+        print('output: ', context)
+        return (True, context)
 
 def check_user_input(data):
     '''
