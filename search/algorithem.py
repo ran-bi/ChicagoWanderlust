@@ -7,11 +7,11 @@ from .util.final_format import get_final_output
 import datetime
 import os
 
-def foof(data):
+def recommend(data):
     valid_data = check_user_input(data)
 
-    if not valid_data['criteris_met']:
-        context = valid_data['context']
+    if not valid_data['valid']:
+        context = {'error': valid_data['error']}
         return (False, context)
     else:
         CHECKIN = valid_data['checkin']
@@ -26,14 +26,14 @@ def foof(data):
         AIRBNB = airbnb(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
         print(AIRBNB)
     except:
-        context = 'Please check internet connection'
+        context = {'error':'Please check internet connection'}
         return (False, context)
 
     try:
         BOOKING = booking(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
         print(BOOKING)
     except:
-        context = 'Please check internet connection and make sure Chrome webderiver works properly'
+        context = {'error': 'Please check internet connection and make sure Chrome webderiver works properly'}
         return (False, context)
 
     LOCATIONS = AIRBNB.append(BOOKING, ignore_index = True)
@@ -42,25 +42,24 @@ def foof(data):
         loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
         print(loc_routes)
     except:
-        context = 'Please use another Google API Key in routes.py'
+        context = {'error':'Please use another Google API Key in routes.py'}
         return (False, context)
     
     try:
         loc_lst = get_filter_l(loc_routes, LOCATIONS, -1)
         print(loc_lst)
     except:
-        context = 'Please check Yelp API Key'
+        context = {'error':'Please check Yelp API Key'}
         return (False, context)
 
     loc = filter_danger(loc_lst, LOCATIONS, loc_routes)
-    print(loc)
-    context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
-    
-    if context == []:
-        return (False, 'No search result matching your input. Please refine your input.')
-    
+
+    if loc == []:
+    	context = {'error': 'No search result matching your input. Please refine your input.'}
+    	return (False, context)
     else:
-        return (True, context)
+    	context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
+    	return (True, context)
 
 def check_user_input(data):
     '''
@@ -68,19 +67,19 @@ def check_user_input(data):
     '''
     rv ={}
     if not check_days(data):
-        return {'criteris_met': False,
-                'context':'Please input valid dates'}
+        return {'valid': False,
+                'error':'Please input valid dates'}
     else:
         checkin, checkout, days = check_days(data)
 
     if not check_price_range(data):
-        return {'criteris_met': False,
-                'context': 'Please input valid price range'}
+        return {'valid': False,
+                'error': 'Please input valid price range'}
     else:
         pricemin, pricemax = check_price_range(data)
     
     prefs = check_prefs(data)
-    rv = {'criteris_met': True,
+    rv = {'valid': True,
           'checkin': checkin,
           'checkout': checkout,
           'days': days,
