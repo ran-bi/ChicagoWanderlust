@@ -10,7 +10,7 @@ import ast
 import os
 from .scrapers import airbnb, booking
 
-APIKEY = 'AIzaSyD66buWs6nFYSamGvVmSYrZ_yXtf9sC5Y8'
+APIKEY = 'AIzaSyDeakZcFljgWfZYvtKg8-LubUeTyo8Fcr0'
 ONE_WEEK_AFTER = datetime.date.today() + datetime.timedelta(days=7)
 T = datetime.datetime.combine(ONE_WEEK_AFTER, datetime.time(10,0))
 ATTRACTIONS = pd.read_csv(os.path.join(os.path.dirname(__file__), "Attraction List.csv"), index_col = 'Identifier')
@@ -31,6 +31,7 @@ def transit_time(from_index, to_index, from_df, to_df, transit_mode):
     gmaps = googlemaps.Client(key= APIKEY)
     start = from_df.loc[from_index][0]
     end = to_df.loc[to_index][0]
+    print('calculating travel time ', start, end)
 
     
     distance_result = gmaps.distance_matrix(start, end, mode=transit_mode, departure_time=T)
