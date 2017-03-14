@@ -9,8 +9,11 @@ The ultimate accommodation finder for leisure travellers to Chicago.
 python3 manage.py runserver
 ```
 
-## Motivation
+## Objectives
 
+Chicago Wanderlust aims to score and recommend lodging locations customized for user’s interests. It allows travelers to explore Chicago’s diverse neighborhoods beyond downtown.
+
+The user – travel planner – inputs intended travel dates, budget for accomodations, his/her priority preference for attractions, and transit type. Chicago Wanderlust will customize travel routes, recommend up to five accomodations based on convenience to attractions, safety, and quality of resturants nearby,and display detailed information with respect to each accomodation.
 
 
 ## Installation
