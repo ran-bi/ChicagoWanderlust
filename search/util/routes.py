@@ -10,7 +10,7 @@ import ast
 import os
 from .scrapers import airbnb, booking
 
-APIKEY = 'AIzaSyCaHWPcxxYS4MCt9eLILdU7E0rdsmiBVSc'
+APIKEY = 'AIzaSyD66buWs6nFYSamGvVmSYrZ_yXtf9sC5Y8'
 ONE_WEEK_AFTER = datetime.date.today() + datetime.timedelta(days=7)
 T = datetime.datetime.combine(ONE_WEEK_AFTER, datetime.time(10,0))
 ATTRACTIONS = pd.read_csv(os.path.join(os.path.dirname(__file__), "Attraction List.csv"), index_col = 'Identifier')

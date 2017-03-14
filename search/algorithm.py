@@ -101,11 +101,15 @@ def check_days(data):
 
     checkin = data['checkin']
     checkout = data['checkout']
+
+    if not checkin or not checkout:
+        return False
+
     delta = checkout - checkin
     days = delta.days
     delta_today = (checkin - datetime.date.today()).days
 
-    if delta_today < 0 or delta_today > 50:
+    if delta_today < 0 or delta_today > 365:
         return False
     elif days > 0 and days <= 2:
         return (checkin, checkout, 1)
@@ -122,6 +126,8 @@ def check_price_range(data):
 
     minprice = data['pricemin']
     maxprice = data['pricemax']
+    if not minprice or not maxprice:
+        return False
     if minprice >= maxprice:
         return False
     else:
@@ -140,44 +146,3 @@ def check_prefs(data):
                 prefs.append(pref)
 
     return prefs
-
-
-'''
-{'attraction_3': 'None', 'pricemax': 300, 'attraction_2': 'None', 'trans': 'driving', 'attraction_1': 'None', 'checkout': datetime.date(2017, 1, 1), 'pricemin': 20, 'checkin': datetime.date(2017, 1, 1)
-'''
-
-
-'''
-default_output = {'BookingLink1': 'https://www.airbnb.com/rooms/15926166',
-'BookingLink2': 'www.booking.com/hotel/us/omni-chicago.en-gb.html?label=gen173nr-1FCAQoggJCDWNpdHlfMjAwMzMxNzNIM2IFbm9yZWZyBXVzX2lsiAEBmAEuuAEKyAEF2AEB6AEB-AELqAID;sid=28e69b52be3281ae5b7ba8b2459908ad;ucfs=1;highlighted_blocks=137190405_86519026_2_0_0;all_sr_blocks=137190405_86519026_2_0_0;room1=A%2CA;hpos=38;dest_type=city;dest_id=20033173;srfid=4a03b0b55938edff661815f856f13538dd1a32faX53;from=searchresults;highlight_room=',
-'BookingLink3': 'www.booking.com/hotel/us/majestic.en-gb.html?label=gen173nr-1FCAQoggJCDWNpdHlfMjAwMzMxNzNIM2IFbm9yZWZyBXVzX2lsiAEBmAEuuAEKyAEF2AEB6AEB-AELqAID;sid=28e69b52be3281ae5b7ba8b2459908ad;ucfs=1;highlighted_blocks=5670701_91458826_0_1_0;all_sr_blocks=5670701_91458826_0_1_0;room1=A%2CA;hpos=7;dest_type=city;dest_id=20033173;srfid=4a03b0b55938edff661815f856f13538dd1a32faX62;from=searchresults;highlight_room=',
-'BookingLink4': 'https://www.airbnb.com/rooms/1056430',
-'Hotel1': 'Private Room, Private Neighborhood, Great Location',
-'Hotel2': 'Omni Chicago Hotel',
-'Hotel3': 'Majestic Hotel',
-'Hotel4': 'Charming space in Boystown/Lakeview',
-'Price1': 62.0,
-'Price2': 88.0,
-'Price3': 282.0,
-'Price4': 106.0,
-'Route1': '#Day 1 North Avenue Beach --> Lakefront Trail --> Lincoln Park Zoo --> Maggie Daley Park   #Day 2 Shedd Aquarium --> Grant Park --> Millennium Park --> Lincoln Park',
-'Route2': '#Day 1 Shedd Aquarium --> Lakefront Trail   #Day 2 Lincoln Park Zoo --> Maggie Daley Park --> North Avenue Beach --> Grant Park --> Millennium Park --> Lincoln Park',
-'Route3': '#Day 1 Grant Park --> Lakefront Trail --> Lincoln Park Zoo --> Maggie Daley Park   #Day 2 Shedd Aquarium --> North Avenue Beach --> Millennium Park --> Lincoln Park',
-'Route4': '#Day 1 Millennium Park --> Lakefront Trail --> Lincoln Park Zoo --> Maggie Daley Park   #Day 2 Shedd Aquarium --> North Avenue Beach --> Grant Park --> Lincoln Park'}
-
-'''
-
-
-'''	
-	CHECKIN = data['checkin']
-	CHECKOUT = data['checkout']
-	PRICEMIN = data['pricemin']
-	PRICEMAX = data['pricemax']
-	AIRBNB = airbnb(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
-	BOOKING = booking(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
-	LOCATIONS = AIRBNB.append(BOOKING, ignore_index=True).iloc[:5, :]
-	rv = LOCATIONS.to_dict
-	context = {'checkin': rv['url'][1],
-	'checkout': rv['name'][2],
-	'pricemin': rv['url'][2]}
-'''
