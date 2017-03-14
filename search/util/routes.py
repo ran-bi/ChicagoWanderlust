@@ -32,7 +32,7 @@ def transit_time(from_index, to_index, from_df, to_df, transit_mode):
     start = from_df.loc[from_index][0]
     end = to_df.loc[to_index][0]
 
-    print(start, end)
+    
     distance_result = gmaps.distance_matrix(start, end, mode=transit_mode, departure_time=T)
     time_element = distance_result['rows'][0]['elements'][0]['duration']['text']
     time_element = time_element.replace('s','')
@@ -45,7 +45,7 @@ def transit_time(from_index, to_index, from_df, to_df, transit_mode):
         transit_time = int(h)*60 + int(m)
     else:
         transit_time = int(time_element)
-    print(transit_time)
+    
     return transit_time
 
 
