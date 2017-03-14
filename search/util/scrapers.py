@@ -122,11 +122,11 @@ def booking(checkin, checkout, minprice, maxprice, toprate=50):
 			coord = tuple([float(i) for i in raw_coord.get('data-coords').split(",")]) if raw_coord.get('data-coords') else None
 			hotel['coord'] = (coord[1], coord[0]) if coord else None
 			hotels.append(hotel)
-			print(hotel['name'])
+			
 
 		raw_nextpage = soup.select('a[class*=paging-next]')
 		nextpage = 'http://www.booking.com' + raw_nextpage[0].get('href') if raw_nextpage else None
-		print(nextpage)
+		
 		page_count += 1
 		searchlink = nextpage if nextpage else None
 
