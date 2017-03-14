@@ -1,4 +1,15 @@
 def get_route(location_index, output, df_spots):
+    '''
+    Get the route string of attraction names from the output 
+
+    Inputs:
+        location_index: location candidate identifier
+        output: dictionary
+        df_spots: attractions dataframe
+
+    Outputs:
+        route_str: string, two kinds, one-day or two-day route
+    '''
 
     if 'route' in output[location_index]:
         route_l = []
@@ -30,6 +41,18 @@ def get_route(location_index, output, df_spots):
     return route_str
 
 def get_final_output(index_list, output, df_spots, df_location):
+    '''
+    Get the final output format to meet the requirements of the front end
+
+    Inputs:
+        index_list: list, location identifier list
+        output: dictionary
+        df_spots: attractions dataframe
+        df_location: locations dataframe
+
+    Outputs:
+        final_output: dictionary
+    '''
     l = len(index_list)
     final_output = {}
     for i in range(l):
