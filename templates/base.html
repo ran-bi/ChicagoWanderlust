@@ -127,9 +127,8 @@
 <h5>- Crime data:  <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">Reported incidents of crime in Chicago</a>, <a href="https://www.cityofchicago.org/city/en/depts/dcd/supp_info/community_area_2000and2010censuspopulationcomparisons.html">Community Area 2000 and 2010 Census Population</a>, and <a href="https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6">Chicago community boundaries</a></h5>
 <h5>- Travel time between two places: <a href="https://developers.google.com/maps/documentation/distance-matrix/intro">GoogleMaps Distance Matrix API</a> </h5>
 <h5>- Food Index:<a href="http://airbnbapi.org">Yelp API</a> </h5>
-<h5><u>Data consolidation</u></h5>
-<h5>- To get a crime rate of each community, we first extract 2016 crime incidents, then filter crime types that tourists concern most, including assulat, homicide, bulglary, theft, etc. Finally, we aggregate crime incidents to community total and calculate crime rate for each community</h6>
-<h5>- ?????Food index consisting of rating and review count is calculated for each location candidate
+<h5><u>Crime Data consolidation</u></h5>
+<h5>- Crime rate is calculated on community level. We firstly extract 2016 crime incidents, then select incidents by crime types that tourists concern most, including assulat, homicide, bulglary, etc. Finally, crime incidents are aggregated to community level and crime rate is calculated per 1,000 capita. </h5>
 
 
 
@@ -174,11 +173,12 @@
                                         <h3 class="panel-title"><b>4. Overall Selection Structure</b></h3>
                                       </div>
                                       <div class="panel-body">
-<h5>- Get the initialized location candidate list based on the ranking from Airbnb and Booking</h5>
-<h5>- Get the total travel time for each location candidate based on the algorithm of route selection</h5>
-<h5>- Ascending sort location candidate list with the total travel time index</h5>
-<h5>- Ascending sort location candidate list with the food index</h5>
-<h5>- Filter out unsafe location candidate using crime rate in each community </h5>
+<h5>- Obtain accommodation listings from Airbnb and Booking, select top 100 ranking ones listed on the websites</h5>
+<h5>- Select attractions to visit based on attraction selection algorithem </h5>
+<h5>- Calculate total transportation time for each accommodation candidate based on the route selection algorithem</h5>
+<h5>- Ascending sort location candidate list with the transportation time index</h5>
+<h5>- Ascending sort location candidate list based on the quality of restaurants nearby</h5>
+<h5>- Drop accommodations located in dangerous communities </h5>
                                       </div>
                                     </div>  
                             </div>
