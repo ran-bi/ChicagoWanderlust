@@ -306,6 +306,14 @@ def route_from_locations(loc_lst, LOCATIONS, all_to_visit, routes, transit_mode,
 
 def filter_output(output, n): # for flexibility, mean+n*sd
     '''
+    Using statistical method to filter output with total travel time index
+
+    Inputs:
+        output: dictionary
+        n: integer/float, using for mean+n*sd to find the benchmark
+
+    Outputs:
+        filter_output: list, location indentifier list
     '''
     t_l = []
     filter_l = []
@@ -327,6 +335,16 @@ def filter_output(output, n): # for flexibility, mean+n*sd
 
 def select_by_routes(prefs, LOCATIONS, day, transit_mode, n=0):
     '''
+    With users' inputs, get the output dictionary including location indentifier, total travel time and travel routes
+
+    Inputs:
+        prefs: list of strings (0/1/2/3 ordered preferences)
+        LOCATIONS: location dataframe
+        day: integer
+        transit_mode: string, "driving" or "transit"
+
+    Outputs:
+        output: dictionary
 
     '''
     all_to_visit = select_attraction(ATTRACTIONS, prefs, day)
