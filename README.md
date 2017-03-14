@@ -9,10 +9,6 @@ The ultimate accommodation finder for leisure travellers to Chicago.
 python3 manage.py runserver
 ```
 
-## Motivation
-
-
-
 ## Installation
 
 **Python packages required:**

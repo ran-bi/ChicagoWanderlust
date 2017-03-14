@@ -8,6 +8,18 @@ import datetime
 import os
 
 def recommend(data):
+    '''
+    Consolidate all functions in /util.
+
+    Input:
+        data: dictionary of user input from webpage.
+
+    Output:
+        tuple (bool, context)
+        bool: True if search result turned. False if error occurs.
+        context: Dictionary of search result inculding hotel name, price, url and coordinates, 
+                 or dictionary of error message.
+    '''
     valid_data = check_user_input(data)
 
     if not valid_data['valid']:
@@ -24,14 +36,14 @@ def recommend(data):
 
     try:
         AIRBNB = airbnb(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
-        print(AIRBNB)
+        
     except:
         context = {'error':'Please check internet connection'}
         return (False, context)
 
     try:
         BOOKING = booking(CHECKIN, CHECKOUT, PRICEMIN, PRICEMAX)
-        print(BOOKING)
+        
     except:
         context = {'error': 'Please check internet connection and make sure Chrome webderiver works properly'}
         return (False, context)
@@ -40,14 +52,14 @@ def recommend(data):
 
     try:
         loc_routes = select_by_routes(PREFS, LOCATIONS, DAYS, TRANSIT_MODE, -1)
-        print(loc_routes)
+        
     except:
         context = {'error':'Please use another Google API Key in routes.py'}
         return (False, context)
     
     try:
         loc_lst = get_filter_l(loc_routes, LOCATIONS, -1)
-        print(loc_lst)
+        
     except:
         context = {'error':'Please check Yelp API Key'}
         return (False, context)
@@ -59,6 +71,7 @@ def recommend(data):
     	return (False, context)
     else:
     	context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
+        print(context)
     	return (True, context)
 
 def check_user_input(data):
