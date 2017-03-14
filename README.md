@@ -56,6 +56,7 @@ Within a few minutes (depending on your input, and this is mainly constrained by
 ## Notes
 
 - It takes around 5 minutes to run the program in VM.
+- Airbnb price in our result includes reservation fee, cleaning fee, etc. The price shown on Airbnb website is room price only. 
 - Airbnb price may be different from real-time price on website due to the unofficial API.
 
 ## Contributors
