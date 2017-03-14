@@ -1,6 +1,32 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
+<style>
+.panel-heading [data-toggle="collapse"]:after
+{
+    font-family: 'Glyphicons Halflings';
+    content: "\e072";
+    float: right;
+    color: #b0c5d8;
+    font-size: 18px;
+    line-height: 22px;
+
+    -webkit-transform: rotate(-90deg);
+    -moz-transform:    rotate(-90deg);
+    -ms-transform:     rotate(-90deg);
+    -o-transform:      rotate(-90deg);
+    transform:         rotate(-90deg);
+}
+.panel-heading [data-toggle="collapse"].collapsed:after
+{
+    -webkit-transform: rotate(90deg);
+    -moz-transform:    rotate(90deg);
+    -ms-transform:     rotate(90deg);
+    -o-transform:      rotate(90deg);
+    transform:         rotate(90deg);
+}
+</style>
+
 
 <head>
 
@@ -14,6 +40,9 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="https://blackrockdigital.github.io/startbootstrap-new-age/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
 
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -46,14 +75,14 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Team - Chicago Wanderlust</a>
+                <a class="navbar-brand page-scroll" href=" ">Home - Chicago Exploer</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="https://www.classes.cs.uchicago.edu/archive/2017/winter/12200-1/project.html">About CS122 Project</a>
+                        <a class="page-scroll" href="#algorithem">About Recommendation Algorithem</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -65,57 +94,99 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <header>
+
+    {% block content %}
+    {% endblock %}
+
+    <section id="algorithem" class="features">
         <div class="container">
             <div class="row">
-                <div class="col-sm-7">
-                    <div class="header-content">
-                        <div class="header-content-inner">
-                            <h1> Accommodation finder for a safe, convenient and tasty leisure experience in Chicago</h1>
-                            <a href="#search" class="btn btn-outline btn-xl page-scroll">Learn More</a>
+                <div class="col-lg-12 text-center">
+                    <div class="section-heading">
+                        <h2><b>Recommendation Algorithem</b></h2>
+                        <p class="text-muted">Check out why and how you get your customized recommendations</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+     
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <!-- <i class="icon-screen-smartphone text-primary"></i> -->
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h3 class="panel-title"><b>1. Data Collection</b></h3>
+                                      </div>
+                                      <div class="panel-body">
+<h5><u>Data Source</u></h5>
+<h5>- Airbnb data: unofficial <a href="http://airbnbapi.org">Airbnb API</a> </h5>
+<h5>- Hotel data: scraping <a href="http://www.booking.com">booking.com</a> </h5>
+<h5>- Crime data:  <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">Reported incidents of crime in Chicago</a>, <a href="https://www.cityofchicago.org/city/en/depts/dcd/supp_info/community_area_2000and2010censuspopulationcomparisons.html">Community Area 2000 and 2010 Census Population</a>, and <a href="https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6">Chicago community boundaries</a></h5>
+<h5>- Travel time between two places: <a href="https://developers.google.com/maps/documentation/distance-matrix/intro">GoogleMaps Distance Matrix API</a> </h5>
+<h5>- Food Index:<a href="http://airbnbapi.org">Yelp API</a> </h5>
+<h5><u>Data consolidation</u></h5>
+<h5>- To get a crime rate of each community, we first extract 2016 crime incidents, then filter crime types that tourists concern most, including assulat, homicide, bulglary, theft, etc. Finally, we aggregate crime incidents to community total and calculate crime rate for each community</h6>
+<h5>- ?????Food index consisting of rating and review count is calculated for each location candidate
+
+
+
+                                      </div>
+                                    </div>                                   
+                            </div>
+
+                            <div class="col-md-6">
+                                    <!-- <i class="icon-screen-smartphone text-primary"></i> -->
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h3 class="panel-title"><b>2. Attraction Selection</b></h3>
+                                      </div>
+                                      <div class="panel-body">
+<h5>- Attraction selection is based on a pre-determined database of 32 popular attractions in Chicago. Each attraction falls into at least 1 of the 8 attraction type categories. If the user chooses to stay in Chicago for 3 nights or more, we will recommend 2 days of itinerary (12 to 15 hours in total spent at the attractions), and 1 day of itinerary (6 to 8 hours) otherwise. </h5>
+<h5>- Selection is based on intuitive criteria. For example, if a user lists his or her top preferences, the attraction(s) that meet all 3 preferences will be considered first, followed by attractions that meet only the top 2 preferences, et cetera. </h5>
+<h5>- Additional thresholds are applied so that the diversity of recommended attractions can be assured. For example, even if you pick “museums” as your only preference, you will likely get some attractions other than museums, especially when you stay longer than 2 nights. </h5>
+<h5>- Total time recommended to spend at the attractions will be as close as to the upper limit (i.e., 8 hours for 1 day, 15 hours for 2 days) as possible.</h5>
+                                      </div>
+                                    </div>  
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <!-- <i class="icon-screen-smartphone text-primary"></i> -->
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h3 class="panel-title"><b>3. Route Selection</b></h3>
+                                      </div>
+                                      <div class="panel-body">
+<h5>- Route selection functions are based on recursive structures. </h5>
+<h5>- Under most occasions, we recommend you to pick an attraction as your next spot if it takes the least time to get there. </h5>
+<h5>- For 2-day itineraries, the 1st day tends to be fuller than the 2nd, but shall not exceed 8 hours, unless in very rare cases when all selected attractions need a great amount of time per se. </h5>
+                                      </div>
+                                    </div>  
+                            </div>
+                            <div class="col-md-6">
+                                    <!-- <i class="icon-screen-smartphone text-primary"></i> -->
+                                    <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                        <h3 class="panel-title"><b>4. Overall Selection Structure</b></h3>
+                                      </div>
+                                      <div class="panel-body">
+<h5>- Get the initialized location candidate list based on the ranking from Airbnb and Booking</h5>
+<h5>- Get the total travel time for each location candidate based on the algorithm of route selection</h5>
+<h5>- Ascending sort location candidate list with the total travel time index</h5>
+<h5>- Ascending sort location candidate list with the food index</h5>
+<h5>- Filter out unsafe location candidate using crime rate in each community </h5>
+                                      </div>
+                                    </div>  
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-5">
-                    <div style="width:480px;height:635px;overflow:hidden">
-                    <img src="https://s-media-cache-ak0.pinimg.com/736x/4e/de/7f/4ede7f2ad9f84a96d8d9c84764f1f8ef.jpg" alt="my dog eating a tangerine">
-                    </div>
-                </div>
+              
             </div>
         </div>
-    </header>
-
-<!-- 
-    <section id="download" class="download bg-primary text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2 class="section-heading">Discover what all the buzz is about!</h2>
-                    <p>Our app is available on any mobile device! Download now to get started!</p>
-                    <div class="badges">
-                        <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
-                        <a class="badge-link" href="#"><img src="img/app-store-badge.svg" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-
-
-    <section class="cta">
-        <div class="cta-content">
-            <div id="search" class="container">
-                <h1>
-                <font size="10" face="Helvetica" color=#FFC300>Find Your Ideal Places to Stay</font>
-                </h1>
-                <br>
-                <br>
-                    {% block content %}
-                    {% endblock %}
-            </div>
-        </div>
-        <div class="overlay"></div>
     </section>
 
     <section id="contact" class="contact bg-primary">
@@ -159,6 +230,12 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="https://blackrockdigital.github.io/startbootstrap-new-age/vendor/bootstrap/js/bootstrap.min.js"></script>
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+
+
+
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
@@ -168,7 +245,3 @@
 </body>
 
 </html>
-
-
-
-

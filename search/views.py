@@ -21,7 +21,7 @@ def home(request):
             data = form.cleaned_data
             print(data)
             template = 'results.html'
-            criteris_met, context = algorithem.foof(data)
+            criteris_met, context = algorithem.recommend(data)
             #Criteria met show this page
             if criteris_met:
             	return render(request, template, context)
