@@ -1,24 +1,4 @@
-
-# output sample
-'''
-output = {8: {'total travel time': 181, 'day 1 route': [(29, 1.0), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (24, 1.25), (2, 1.75), (20, 1.25)]}, \
-1: {'total travel time': 167, 'day 1 route': [(17, 4.0), (8, 2.0)], 'day 2 route': [(13, 2.5), (12, 1.25), (29, 1.0), (24, 1.25), (2, 1.75), (20, 1.25)]}, \
-20: {'total travel time': 223, 'day 1 route': [(24, 1.25), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (2, 1.75), (20, 1.25)]}, \
-39: {'total travel time': 179, 'day 1 route': [(2, 1.75), (8, 2.0), (13, 2.5), (12, 1.25)], 'day 2 route': [(17, 4.0), (29, 1.0), (24, 1.25), (20, 1.25)]}}
-'''
-
 def get_route(location_index, output, df_spots):
-    '''
-    Get one-day or two-day route string from output 
-
-    Inputs:
-        location_index: integer, candidate identifier
-        output: dictionary
-        df_spots: dataframe of attractions
-
-    Outputs:
-        route_str: string
-    '''
 
     if 'route' in output[location_index]:
         route_l = []
@@ -50,17 +30,6 @@ def get_route(location_index, output, df_spots):
     return route_str
 
 def get_final_output(index_list, output, df_spots, df_location):
-    '''
-    Get the final output format to meet the requirement of front end
-
-    Inputs:
-        index_list: list
-        output: dictionary
-        df_spots, df_location: dataframe
-
-    Outputs:
-        final_output: dictionary
-    '''
     l = len(index_list)
     final_output = {}
     for i in range(l):

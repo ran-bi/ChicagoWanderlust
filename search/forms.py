@@ -1,3 +1,6 @@
+# Code substantially modified, made reading the documentation at 
+# https://docs.djangoproject.com/en/1.10/ref/forms/
+
 from django import forms
 import datetime
 from django.forms.extras.widgets import SelectDateWidget
@@ -18,18 +21,18 @@ TRANS = _dropdown_menu(TRANS_OPTIONS)
 class RecommendationForm(forms.Form):
 	checkin = forms.DateField(
 		    widget=SelectDateWidget,
-		    label='Check-in Date',
+		    label='Check-in(*)',
 		    required=False)
 	checkout = forms.DateField(
 		    widget=SelectDateWidget,
-		    label='Check-out Date',
+		    label='Check-out(*)',
 		    required=False)
 	pricemin = forms.IntegerField(
-			label='Minimum Price',
+			label='Min Price(*)',
 			help_text='e.g. 100',
 			required=False)
 	pricemax = forms.IntegerField(
-			label='Maximum Price',
+			label='Max Price(*)',
 			help_text='e.g. 500',
 			required=False)
 	attraction_1 = forms.ChoiceField(
