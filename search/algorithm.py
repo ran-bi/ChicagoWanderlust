@@ -71,6 +71,7 @@ def recommend(data):
     	return (False, context)
     else:
     	context = get_final_output(loc, loc_routes, ATTRACTIONS, LOCATIONS)
+        print(context)
     	return (True, context)
 
 def check_user_input(data):
