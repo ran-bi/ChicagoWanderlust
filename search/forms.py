@@ -1,3 +1,6 @@
+# Code substantially modified, made reading the documentation at 
+# https://docs.djangoproject.com/en/1.10/ref/forms/
+
 from django import forms
 import datetime
 from django.forms.extras.widgets import SelectDateWidget
@@ -25,11 +28,11 @@ class RecommendationForm(forms.Form):
 		    label='Check-out(*)',
 		    required=False)
 	pricemin = forms.IntegerField(
-			label='Min Price',
+			label='Min Price(*)',
 			help_text='e.g. 100',
 			required=False)
 	pricemax = forms.IntegerField(
-			label='Max Price',
+			label='Max Price(*)',
 			help_text='e.g. 500',
 			required=False)
 	attraction_1 = forms.ChoiceField(

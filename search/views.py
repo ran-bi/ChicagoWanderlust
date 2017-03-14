@@ -1,18 +1,12 @@
+# Code substantially modified, made reading the documentation at 
+# https://docs.djangoproject.com/en/1.10/ref/class-based-views/base/
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .forms import RecommendationForm
-from . import algorithem
+from . import algorithm
 
-# Create your views here.
 def home(request):
-    '''
-    Based on the Http Request, return the recommendations page. 
-    we render either the recommendation met page or the recommendation not met page
-    Input: Http request
-    Output: Http Request with the html page and the context we want the html
-    page to render
-    '''
     
     if request.method == 'POST':
         form = RecommendationForm(request.POST)
@@ -21,15 +15,14 @@ def home(request):
             data = form.cleaned_data
             print(data)
             template = 'results.html'
-            criteris_met, context = algorithem.recommend(data)
-            #Criteria met show this page
+            criteris_met, context = algorithm.recommend(data)
+            #Criteria met show result.html page
             if criteris_met:
             	return render(request, template, context)
-            #Criteria NOT met show this page
+            #Criteria NOT met show noresult.html page
             else:
             	template = 'noresults.html'
             	return render(request, template, context)
-
     else:    
         form = RecommendationForm()
         template = 'home.html'
