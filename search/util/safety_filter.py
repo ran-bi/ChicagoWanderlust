@@ -85,7 +85,6 @@ def filter_danger(locations, df, loc_routes):
 	danger_polys = get_danger_polys()
 	safe_locations = []
 	for location in locations:
-		print(location)
 		coord = df.iloc[location][0]
 		if not is_danger(coord, danger_polys):
 			safe_locations.append(location)

@@ -134,7 +134,6 @@ def get_filter_l(output, df_location, n): # for flexibility, mean+n*sd
     rating_benchmark, review_benchmark, dic = get_benchmark(output, df_location, n)
     filter_l = []
     for key in output:
-        print(key)
         if key in dic:
             rating, review = dic[key]            
             if rating >= rating_benchmark and review >= review_benchmark:
