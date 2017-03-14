@@ -50,7 +50,7 @@ def airbnb(checkin, checkout, min_price, max_price, toprate=50):
 
 	return df.iloc[:toprate, :]
 
-def booking(checkin, checkout, minprice, maxprice, toprate=30):
+def booking(checkin, checkout, minprice, maxprice, toprate=50):
 	'''
 	Scrape booking.com to gather hotel information matching the search criteria.
 
