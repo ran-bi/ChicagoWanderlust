@@ -28,14 +28,14 @@ python3 manage.py runserver
 
 ## Code Structure
 
-**Main funcions under search folder**
+**Main funcions under /search**
 - /util/scrapers.py: Airbnb and Booking.com scrapers
 - /util/routes.py: attraction and route selection algorithm
 - /util/yelp_filter.py: restaurant quality algorithm
 - /util/safety_filter.py: filter out locations in dangerous communities
 - algorithm.py: consolidated function linked to front-end
 
-**Crime data under Preprocessing folder**
+**Crime data under /Preprocessing**
 - csv files: raw data
 - crimefilter.py: code for crimerate calculation and generate geojson file
 - danger_poly.json: output geojeson file for dangerous communities
